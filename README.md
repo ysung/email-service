@@ -11,7 +11,7 @@ I separated different senders to different files. New sender can be easliy imple
 ###Trade-offs you might have made, anything you left out
 The project assumes users provide valid API key and API URL. The system should add a feature to check if the user is authorized to use the API in the future.
 
-###what you might do differently if you were to spend additional time on the project.
+###What you might do differently if you were to spend additional time on the project.
 I will use Flask in this project. Flask is a microframework and impressive with built-in development server and fast debugger, Jinja2 templating, RESTful request dispatching and integrated support for unit testing. Beside, I will use regular expression to detect the invalid emails.
 
 ###Link to other code you're particularly proud of.
