@@ -19,8 +19,6 @@ I have used R to complete data analysis and statistical visualization on social 
 https://github.com/ysung/R
 
 ###Link to your resume or public profile.
-My LinkedIn: www.linkedin.com/in/ycsung
-
-My AngelList: https://angel.co/yun-chieh-sung
-
-My Email: Yun-Chieh Sung, s.yunchieh@gmail.com
+* My LinkedIn: www.linkedin.com/in/ycsung
+* My AngelList: https://angel.co/yun-chieh-sung
+* My Email: Yun-Chieh Sung, s.yunchieh@gmail.com
