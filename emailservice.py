@@ -9,12 +9,12 @@ class EmailService:
 	If one of the services goes down, your service can quickly failover to a 
 	different provider without affecting your customers.
 
-  status  message  
-  0       success
-  1       from email address invalid
-  2       to mail addreaa in vaild
-  3       subject and text both are empty
-  4				both two email sender failed in sending
+	status message  
+	0      success
+	1      from email address invalid
+	2      to mail addreaa in vaild
+	3      subject and text both are empty
+	4      both two email sender failed in sending
 
 	'''
 	def sentMail(from_email, to_email, subject = '', text = '', cc_email = [], bcc_email = []):

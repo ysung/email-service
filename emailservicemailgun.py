@@ -21,12 +21,12 @@ class EmailServiceMailGun:
 		return 0 if access, 1 if fail. 
 		'''
 		message = {"from": from_email, 
-							 "to": to_email, 
-							 "subject": subject, 
-							 "text": text, 
-							 "cc": cc_email, 
-							 "bcc": bcc_email
-							 }
+		"to": to_email, 
+		"subject": subject, 
+		"text": text, 
+		"cc": cc_email, 
+		"bcc": bcc_email
+		}
 		if len(cc_email) == 0:
 			message["cc"] = []
 		if len(bcc_email) == 0:
