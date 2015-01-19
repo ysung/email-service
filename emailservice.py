@@ -1,57 +1,51 @@
 from emailservicemailgun import EmailServiceMailGun
 from emailservicemandrill import EmailServiceMandrill
 
-def sentMail(fromEmail, toEmail, subject, text, ccEmail, bccEmail):
-	senders = []
-	senders.extend([EmailServiceMailGun(), EmailServiceMandrill()])
-	id = 0
-	message = ''
+class EmailService:
+	'''
+	This class is the send-mail service interface.
+	A service that accepts the necessary information and sends emails. 
+	It should provide an abstraction between two different email service providers. 
+	If one of the services goes down, your service can quickly failover to a 
+	different provider without affecting your customers.
 
-	if fromEmail is None or len(fromEmail) == 0:
-		return 1, 'from email address invalid'
-	if toEmail is None or len(toEmail) == 0:
-		to_list = []
-	if ccEmail is None or len(ccEmail) == 0:
-		ccEmail = []
-	if bccEmail is None or len(bccEmail) == 0:
-		bccEmail = []
-	if len(toEmail) == 0 and len(ccEmail) == 0 and len(bccEmail) == 0:
-		return 2, 'No valid to/cc/bcc email address. Please provide at least one valid to/cc/bcc email address.'
+  status  message  
+  0       success
+  1       from email address invalid
+  2       to mail addreaa in vaild
+  3       subject and text both are empty
+  4				both two email sender failed in sending
 
-	if not subject and not text:
-		return 3, 'subject and text both are empty'
-	elif not subject:
-		suject = ''
-	elif not text:
-		text = ''
+	'''
+	def sentMail(from_email, to_email, subject = '', text = '', cc_email = [], bcc_email = []):
+		senders = []
+		senders.extend([EmailServiceMailGun(), EmailServiceMandrill()])
+		id = 0
+		message = ''
 
-	status = senders[id].send(fromEmail, toEmail, subject, text, ccEmail, bccEmail);
+		if from_email is None or len(from_email) == 0:
+			return 1, 'Please provide valid from email address.'
+		if to_email is None or len(to_email) == 0:
+			return 2, 'Please provide at least one valid to email address.'
+		if not subject and not text:
+			return 3, 'subject and text both are empty'
 
-	if status == 0:
-		message = 'success'
-	else:
-	#failover to another email service provider implementation
-		id = (id + 1) % len(senders)
-		status = senders[id].send(fromEmail, toEmail, subject, text, ccEmail, bccEmail);
-	if status == 0:
-		message = 'success'
-	else:
-		status = 4
-		message = 'Emails failed in sending. The error message is as followed:\n' + message
+		status = senders[id].send(from_email, to_email, subject, text, cc_email, bcc_email)
 
-	return status, message
+		if status == 0:
+			message = 'success'
+		else:
+		#failover to another email service provider implementation
+			id = (id + 1) % len(senders)
+			status = senders[id].send(from_email, to_email, subject, text, cc_email, bcc_email)
 
+		if status == 0:
+			message = 'success'
+		else:
+			status = 4
+			message = 'Emails failed in sending'
 
-
-if __name__ == "__main__":
-	_fromEmail = "s.yunchieh@gmail.com"
-	_toEmail = ["ysung@ucdavis.edu","cuitjason@hotmail.com"]
-	_ccEmail = ""
-	_bccEmail = ""
-	_subject = "TEST21"
-	_text = "this is text"
+		return status, message
 
 
-	print (sentMail(_fromEmail, _toEmail, _subject, _text, _ccEmail, _bccEmail))
-	print ("robert")
 
