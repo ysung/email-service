@@ -17,3 +17,4 @@ if __name__ == "__main__":
 
 	result = EmailService.sentMail(from_email, to_email, subject, text)
 	print (result)
+

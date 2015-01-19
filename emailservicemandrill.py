@@ -51,3 +51,4 @@ class EmailServiceMandrill:
 		status = 0 if result[0]['status'] == 'sent' else 1
 		#print (result[0]['status'])
 		return status
+
